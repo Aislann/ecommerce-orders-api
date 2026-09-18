@@ -268,5 +268,39 @@ namespace EcommerceOrders.UnitTests.Orders
 
             Assert.Equal("Only processed orders can be sent.", exception.Message);
         }
+
+        [Fact]
+        public void Should_not_create_order_without_buyer()
+        {
+            var items = new[]
+            {
+                new OrderItem(
+                    productId: 1,
+                    price: 100m,
+                    quantity: 1)
+            };
+
+            var exception = Assert.Throws<DomainException>(() =>
+                new Order(
+                    userId: 0,
+                    orderItems: items));
+
+            Assert.Equal(
+                "Buyer is required.",
+                exception.Message);
+        }
+
+        [Fact]
+        public void Should_not_create_order_without_items()
+        {
+            var exception = Assert.Throws<DomainException>(() =>
+                new Order(
+                    userId: 1,
+                    orderItems: Array.Empty<OrderItem>()));
+
+            Assert.Equal(
+                "Order must contain at least one product.",
+                exception.Message);
+        }
     }
 }

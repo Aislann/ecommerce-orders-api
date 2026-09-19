@@ -14,6 +14,7 @@ namespace EcommerceOrders.Domain.Entites
         public DateTime CreatedAt { get; private set; }
         public DateTime? UpdatedAt { get; private set; }
         public IReadOnlyCollection<OrderItem> Items => _orderItems.AsReadOnly();
+        private Order() { }
 
         public Order(int userId, IEnumerable<OrderItem> orderItems)
         {

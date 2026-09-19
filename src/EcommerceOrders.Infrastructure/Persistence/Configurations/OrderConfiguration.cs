@@ -31,8 +31,8 @@ namespace EcommerceOrders.Infrastructure.Persistence.Configurations
                 .OnDelete(DeleteBehavior.Cascade);
 
             builder.Navigation(order => order.Items)
-                .UsePropertyAccessMode(
-                    PropertyAccessMode.Field);
+                .HasField("_items")
+                .UsePropertyAccessMode(PropertyAccessMode.Field);
         }
     }
 }

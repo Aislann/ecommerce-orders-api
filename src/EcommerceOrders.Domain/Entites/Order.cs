@@ -6,14 +6,14 @@ namespace EcommerceOrders.Domain.Entites
 {
     public class Order
     {
-        private readonly List<OrderItem> _orderItems = new List<OrderItem>();
+        private readonly List<OrderItem> _items = new List<OrderItem>();
 
         public int Id { get; private set; }
         public int UserId { get; private set; }
         public OrderStatus Status { get; private set; }
         public DateTime CreatedAt { get; private set; }
         public DateTime? UpdatedAt { get; private set; }
-        public IReadOnlyCollection<OrderItem> Items => _orderItems.AsReadOnly();
+        public IReadOnlyCollection<OrderItem> Items => _items.AsReadOnly();
         private Order() { }
 
         public Order(int userId, IEnumerable<OrderItem> orderItems)
@@ -28,7 +28,7 @@ namespace EcommerceOrders.Domain.Entites
             Status = OrderStatus.Started;
             CreatedAt = DateTime.UtcNow;
 
-            _orderItems.AddRange(orderItems);
+            _items.AddRange(orderItems);
         }
 
         internal Order(int id, int userId, IEnumerable<OrderItem> items) : this(userId, items)
@@ -52,8 +52,8 @@ namespace EcommerceOrders.Domain.Entites
 
             UserId = userId;
 
-            _orderItems.Clear();
-            _orderItems.AddRange(orderItems);
+            _items.Clear();
+            _items.AddRange(orderItems);
 
             UpdatedAt = DateTime.UtcNow;
         }

@@ -1,9 +1,11 @@
 ﻿using EcommerceOrders.Application.Interfaces.Repositories;
+using EcommerceOrders.Infrastructure.Persistence;
+using EcommerceOrders.Infrastructure.Persistence.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace EcommerceOrders.Infrastructure.Persistence.Repositories
+namespace EcommerceOrders.Infrastructure.Extensions
 {
     public static class InfrastructureServiceExtensions
     {

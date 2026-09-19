@@ -1,6 +1,36 @@
+using EcommerceOrders.Api.Endpoints;
+using EcommerceOrders.Application.Extensions;
+using EcommerceOrders.Infrastructure.Extensions;
+using EcommerceOrders.Infrastructure.Persistence;
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddApplication();
+
+builder.Services.AddInfrastructure(
+    builder.Configuration);
+
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
+
 var app = builder.Build();
 
-app.MapGet("/", () => "Hello World!");
+using (var scope = app.Services.CreateScope())
+{
+    var context = scope.ServiceProvider
+        .GetRequiredService<AppDbContext>();
+
+    await DbInitializer.InitializeAsync(context);
+}
+
+if (app.Environment.IsDevelopment())
+{
+    app.UseSwagger();
+    app.UseSwaggerUI();
+}
+
+app.MapOrderEndpoints();
+
+app.MapGet("/", () => "Ecommerce Orders API");
 
 app.Run();

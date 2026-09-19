@@ -1,6 +1,6 @@
 ﻿using EcommerceOrders.Application.Interfaces.Repositories;
 using EcommerceOrders.Application.Services.Orders;
-using EcommerceOrders.Domain.Entites;
+using EcommerceOrders.Domain.Entities;
 using EcommerceOrders.Domain.Exceptions;
 using Moq;
 

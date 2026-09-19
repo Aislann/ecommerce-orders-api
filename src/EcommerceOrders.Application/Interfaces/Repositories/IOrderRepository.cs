@@ -1,4 +1,4 @@
-﻿using EcommerceOrders.Domain.Entites;
+﻿using EcommerceOrders.Domain.Entities;
 using EcommerceOrders.Domain.Enums;
 
 namespace EcommerceOrders.Application.Interfaces.Repositories

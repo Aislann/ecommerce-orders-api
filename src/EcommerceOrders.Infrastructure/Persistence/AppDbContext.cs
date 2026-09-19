@@ -1,4 +1,4 @@
-﻿using EcommerceOrders.Domain.Entites;
+﻿using EcommerceOrders.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace EcommerceOrders.Infrastructure.Persistence

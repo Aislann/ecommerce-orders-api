@@ -1,5 +1,5 @@
 ﻿using EcommerceOrders.Application.Interfaces.Repositories;
-using EcommerceOrders.Domain.Entites;
+using EcommerceOrders.Domain.Entities;
 using EcommerceOrders.Domain.Enums;
 using Microsoft.EntityFrameworkCore;
 

@@ -1,6 +1,6 @@
 ﻿using EcommerceOrders.Application.DTOs.Orders;
 using EcommerceOrders.Application.Interfaces.Repositories;
-using EcommerceOrders.Domain.Entites;
+using EcommerceOrders.Domain.Entities;
 using EcommerceOrders.Domain.Exceptions;
 
 namespace EcommerceOrders.Application.Services.Orders

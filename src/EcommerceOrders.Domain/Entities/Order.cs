@@ -1,8 +1,7 @@
 ﻿using EcommerceOrders.Domain.Enums;
 using EcommerceOrders.Domain.Exceptions;
-using System.Net.NetworkInformation;
 
-namespace EcommerceOrders.Domain.Entites
+namespace EcommerceOrders.Domain.Entities
 {
     public class Order
     {

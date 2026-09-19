@@ -62,7 +62,7 @@ namespace EcommerceOrders.UnitTests.Services.Orders
             var service = new GetOrderService(
                 orderRepository.Object);
 
-            var exception = await Assert.ThrowsAsync<DomainException>(
+            var exception = await Assert.ThrowsAsync<NotFoundException>(
                 () => service.ExecuteAsync(1));
 
             Assert.Equal("Order not found.", exception.Message);

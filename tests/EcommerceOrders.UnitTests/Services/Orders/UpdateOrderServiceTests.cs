@@ -129,7 +129,7 @@ namespace EcommerceOrders.UnitTests.Services.Orders
                 ]
             };
 
-            var exception = await Assert.ThrowsAsync<DomainException>(
+            var exception = await Assert.ThrowsAsync<NotFoundException>(
                 () => service.ExecuteAsync(1, request));
 
             Assert.Equal("Order not found.", exception.Message);
@@ -187,7 +187,7 @@ namespace EcommerceOrders.UnitTests.Services.Orders
                 ]
             };
 
-            var exception = await Assert.ThrowsAsync<DomainException>(
+            var exception = await Assert.ThrowsAsync<NotFoundException>(
                 () => service.ExecuteAsync(1, request));
 
             Assert.Equal("Buyer not found.", exception.Message);
@@ -268,7 +268,7 @@ namespace EcommerceOrders.UnitTests.Services.Orders
                 ]
             };
 
-            var exception = await Assert.ThrowsAsync<DomainException>(
+            var exception = await Assert.ThrowsAsync<BusinessRuleException>(
                 () => service.ExecuteAsync(1, request));
 
             Assert.Equal(

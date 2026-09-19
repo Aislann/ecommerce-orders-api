@@ -25,7 +25,7 @@ namespace EcommerceOrders.Application.Services.Orders
                 cancellationToken);
 
             if (user is null)
-                throw new DomainException("Buyer not found.");
+                throw new NotFoundException("Buyer not found.");
 
             var items = new List<OrderItem>();
 
@@ -36,7 +36,7 @@ namespace EcommerceOrders.Application.Services.Orders
                     cancellationToken);
 
                 if (product is null)
-                    throw new DomainException(
+                    throw new NotFoundException(
                         $"Product {itemRequest.ProductId} not found.");
 
                 var item = new OrderItem(

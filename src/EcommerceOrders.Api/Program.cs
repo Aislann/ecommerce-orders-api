@@ -1,4 +1,5 @@
 using EcommerceOrders.Api.Endpoints;
+using EcommerceOrders.Api.Exceptions;
 using EcommerceOrders.Application.Extensions;
 using EcommerceOrders.Infrastructure.Extensions;
 using EcommerceOrders.Infrastructure.Persistence;
@@ -13,7 +14,12 @@ builder.Services.AddInfrastructure(
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddProblemDetails();
+builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+
 var app = builder.Build();
+
+app.UseExceptionHandler();
 
 using (var scope = app.Services.CreateScope())
 {

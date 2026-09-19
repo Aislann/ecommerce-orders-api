@@ -63,7 +63,7 @@ namespace EcommerceOrders.UnitTests.Services.Orders
             var service = new DeleteOrderService(
                 orderRepository.Object);
 
-            var exception = await Assert.ThrowsAsync<DomainException>(
+            var exception = await Assert.ThrowsAsync<NotFoundException>(
                 () => service.ExecuteAsync(1));
 
             Assert.Equal(

@@ -42,7 +42,7 @@ namespace EcommerceOrders.Domain.Entites
         public void Update(int  userId, IEnumerable<OrderItem> orderItems)
         {
             if (Status != OrderStatus.Started)
-                throw new DomainException("Only initiated orders can be changed.");
+                throw new BusinessRuleException("Only initiated orders can be changed.");
 
             if (userId <= 0)
                 throw new DomainException("Buyer is required.");
@@ -63,7 +63,7 @@ namespace EcommerceOrders.Domain.Entites
             if (Status != OrderStatus.Started &&
                 Status != OrderStatus.Processed)
             {
-                throw new DomainException("Only initiated or processed orders can be canceled.");
+                throw new BusinessRuleException("Only initiated or processed orders can be canceled.");
             }
 
             Status = OrderStatus.Canceled;
@@ -73,7 +73,7 @@ namespace EcommerceOrders.Domain.Entites
         public void Process()
         {
             if (Status != OrderStatus.Started)
-                throw new DomainException("Only initiated orders can be processed.");
+                throw new BusinessRuleException("Only initiated orders can be processed.");
 
             Status = OrderStatus.Processed;
             UpdatedAt = DateTime.UtcNow;
@@ -82,7 +82,7 @@ namespace EcommerceOrders.Domain.Entites
         public void Ship()
         {
             if (Status != OrderStatus.Processed)
-                throw new DomainException("Only processed orders can be sent.");
+                throw new BusinessRuleException("Only processed orders can be sent.");
 
             Status = OrderStatus.Shipped;
             UpdatedAt = DateTime.UtcNow;

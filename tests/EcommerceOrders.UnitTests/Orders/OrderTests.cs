@@ -50,7 +50,7 @@ namespace EcommerceOrders.UnitTests.Orders
                     quantity: 1)
             };
 
-            var exception = Assert.Throws<DomainException>(() =>
+            var exception = Assert.Throws<BusinessRuleException>(() =>
                 order.Update(
                     userId: 2,
                     orderItems: newItems));
@@ -153,7 +153,7 @@ namespace EcommerceOrders.UnitTests.Orders
             order.Process();
             order.Ship();
 
-            var exception = Assert.Throws<DomainException>(() =>
+            var exception = Assert.Throws<BusinessRuleException>(() =>
                 order.Cancel());
 
             Assert.Equal("Only initiated or processed orders can be canceled.", exception.Message);
@@ -176,7 +176,7 @@ namespace EcommerceOrders.UnitTests.Orders
 
             order.Cancel();
 
-            var exception = Assert.Throws<DomainException>(() =>
+            var exception = Assert.Throws<BusinessRuleException>(() =>
                 order.Cancel());
 
             Assert.Equal("Only initiated or processed orders can be canceled.", exception.Message);
@@ -220,7 +220,7 @@ namespace EcommerceOrders.UnitTests.Orders
 
             order.Process();
 
-            var exception = Assert.Throws<DomainException>(() =>
+            var exception = Assert.Throws<BusinessRuleException>(() =>
                 order.Process());
 
             Assert.Equal("Only initiated orders can be processed.", exception.Message);
@@ -263,7 +263,7 @@ namespace EcommerceOrders.UnitTests.Orders
                 userId: 1,
                 orderItems: items);
 
-            var exception = Assert.Throws<DomainException>(() =>
+            var exception = Assert.Throws<BusinessRuleException>(() =>
                 order.Ship());
 
             Assert.Equal("Only processed orders can be sent.", exception.Message);

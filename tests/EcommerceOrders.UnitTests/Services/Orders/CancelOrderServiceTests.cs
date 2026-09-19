@@ -112,7 +112,7 @@ namespace EcommerceOrders.UnitTests.Services.Orders
             var service = new CancelOrderService(
                 orderRepository.Object);
 
-            var exception = await Assert.ThrowsAsync<DomainException>(
+            var exception = await Assert.ThrowsAsync<NotFoundException>(
                 () => service.ExecuteAsync(1));
 
             Assert.Equal("Order not found.", exception.Message);
@@ -155,7 +155,7 @@ namespace EcommerceOrders.UnitTests.Services.Orders
             var service = new CancelOrderService(
                 orderRepository.Object);
 
-            var exception = await Assert.ThrowsAsync<DomainException>(
+            var exception = await Assert.ThrowsAsync<BusinessRuleException>(
                 () => service.ExecuteAsync(1));
 
             Assert.Equal(
@@ -199,7 +199,7 @@ namespace EcommerceOrders.UnitTests.Services.Orders
             var service = new CancelOrderService(
                 orderRepository.Object);
 
-            var exception = await Assert.ThrowsAsync<DomainException>(
+            var exception = await Assert.ThrowsAsync<BusinessRuleException>(
                 () => service.ExecuteAsync(1));
 
             Assert.Equal(

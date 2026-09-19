@@ -20,7 +20,7 @@ namespace EcommerceOrders.Application.Services.Orders
                 cancellationToken);
 
             if (order is null)
-                throw new DomainException("Order not found.");
+                throw new NotFoundException("Order not found.");
 
             return new OrderResponse
             {

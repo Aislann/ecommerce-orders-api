@@ -9,7 +9,7 @@ namespace EcommerceOrders.Domain.Entites
         public int Quantity { get; private set; }
         public decimal Price { get; private set; }
 
-        public OrderItem(int productId, int quantity, decimal price)
+        public OrderItem(int productId, decimal price, int quantity)
         {
             if (productId <= 0)
                 throw new DomainException("ProductId must be greater than zero.");

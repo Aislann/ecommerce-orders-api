@@ -7,15 +7,12 @@ using EcommerceOrders.Infrastructure.Persistence;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddApplication();
-
-builder.Services.AddInfrastructure(
-    builder.Configuration);
-
+builder.Services.AddInfrastructure(builder.Configuration);
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
-
 builder.Services.AddProblemDetails();
 builder.Services.AddExceptionHandler<GlobalExceptionHandler>();
+builder.Services.AddHealthChecks();
 
 var app = builder.Build();
 
@@ -38,5 +35,7 @@ if (app.Environment.IsDevelopment())
 app.MapOrderEndpoints();
 
 app.MapGet("/", () => "Ecommerce Orders API");
+
+app.MapHealthChecks("/health");
 
 app.Run();

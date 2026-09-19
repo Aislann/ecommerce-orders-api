@@ -14,6 +14,8 @@ namespace EcommerceOrders.Application.Extensions
             services.AddScoped<UpdateOrderService>();
             services.AddScoped<CancelOrderService>();
             services.AddScoped<DeleteOrderService>();
+            services.AddScoped<ProcessOrderService>();
+            services.AddScoped<ShipOrderService>();
 
             return services;
         }

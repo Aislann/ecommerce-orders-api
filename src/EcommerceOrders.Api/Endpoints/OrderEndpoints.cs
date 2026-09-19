@@ -134,6 +134,48 @@ namespace EcommerceOrders.Api.Endpoints
                 .ProducesProblem(
                     StatusCodes.Status404NotFound);
 
+            group.MapPost(
+                    "/{id:int}/process",
+                    async (
+                        int id,
+                        ProcessOrderService service,
+                        CancellationToken cancellationToken) =>
+                    {
+                        var order = await service.ExecuteAsync(
+                            id,
+                            cancellationToken);
+
+                        return Results.Ok(order);
+                    })
+                .WithName("ProcessOrder")
+                .Produces<OrderResponse>(
+                    StatusCodes.Status200OK)
+                .ProducesProblem(
+                    StatusCodes.Status404NotFound)
+                .ProducesProblem(
+                    StatusCodes.Status409Conflict);
+
+            group.MapPost(
+                    "/{id:int}/ship",
+                    async (
+                        int id,
+                        ShipOrderService service,
+                        CancellationToken cancellationToken) =>
+                    {
+                        var order = await service.ExecuteAsync(
+                            id,
+                            cancellationToken);
+
+                        return Results.Ok(order);
+                    })
+                .WithName("ShipOrder")
+                .Produces<OrderResponse>(
+                    StatusCodes.Status200OK)
+                .ProducesProblem(
+                    StatusCodes.Status404NotFound)
+                .ProducesProblem(
+                    StatusCodes.Status409Conflict);
+
             return app;
         }
     }

@@ -34,8 +34,6 @@ if (app.Environment.IsDevelopment())
 
 app.MapOrderEndpoints();
 
-app.MapGet("/", () => "Ecommerce Orders API");
-
 app.MapHealthChecks("/health");
 
 app.Run();

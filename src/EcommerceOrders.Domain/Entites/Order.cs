@@ -13,7 +13,8 @@ namespace EcommerceOrders.Domain.Entites
         public OrderStatus Status { get; private set; }
         public DateTime CreatedAt { get; private set; }
         public DateTime? UpdatedAt { get; private set; }
-        public IReadOnlyCollection<OrderItem> OrderItems => _orderItems.AsReadOnly();
+        public IReadOnlyCollection<OrderItem> Items => _orderItems.AsReadOnly();
+
         public Order(int userId, IEnumerable<OrderItem> orderItems)
         {
             if (userId <= 0)
@@ -27,6 +28,14 @@ namespace EcommerceOrders.Domain.Entites
             CreatedAt = DateTime.UtcNow;
 
             _orderItems.AddRange(orderItems);
+        }
+
+        internal Order(int id, int userId, IEnumerable<OrderItem> items) : this(userId, items)
+        {
+            if (id <= 0)
+                throw new DomainException("OrderId must be greater than zero.");
+
+            Id = id;
         }
 
         public void Update(int  userId, IEnumerable<OrderItem> orderItems)

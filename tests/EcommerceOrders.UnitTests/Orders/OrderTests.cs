@@ -22,7 +22,7 @@ namespace EcommerceOrders.UnitTests.Orders
                 orderItems: items);
 
             Assert.Equal(OrderStatus.Started, order.Status);
-            Assert.Single(order.OrderItems);
+            Assert.Single(order.Items);
         }
 
         [Fact]
@@ -86,9 +86,9 @@ namespace EcommerceOrders.UnitTests.Orders
                 orderItems: newItems);
 
             Assert.Equal(2, order.UserId);
-            Assert.Single(order.OrderItems);
-            Assert.Equal(2, order.OrderItems.First().ProductId);
-            Assert.Equal(200m, order.OrderItems.First().Price);
+            Assert.Single(order.Items);
+            Assert.Equal(2, order.Items.First().ProductId);
+            Assert.Equal(200m, order.Items.First().Price);
             Assert.NotNull(order.UpdatedAt);
         }
 

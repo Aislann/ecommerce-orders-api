@@ -136,8 +136,8 @@ namespace EcommerceOrders.UnitTests.Services.Orders
 
             var user = new User(
                 1,
-                "John Doe",
-                "john@example.com");
+                "Aislan Oliveira",
+                "aislan@example.com");
 
             userRepository
                 .Setup(repository => repository.GetByIdAsync(

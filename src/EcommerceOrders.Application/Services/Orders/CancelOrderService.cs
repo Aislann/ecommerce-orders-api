@@ -4,16 +4,18 @@ using EcommerceOrders.Domain.Exceptions;
 
 namespace EcommerceOrders.Application.Services.Orders
 {
-    public class GetOrderService
+    public class CancelOrderService
     {
         private readonly IOrderRepository _orderRepository;
 
-        public GetOrderService(IOrderRepository orderRepository)
+        public CancelOrderService(IOrderRepository orderRepository)
         {
             _orderRepository = orderRepository;
         }
 
-        public async Task<OrderResponse> ExecuteAsync(int orderId, CancellationToken cancellationToken = default)
+        public async Task<OrderResponse> ExecuteAsync(
+            int orderId,
+            CancellationToken cancellationToken = default)
         {
             var order = await _orderRepository.GetByIdAsync(
                 orderId,
@@ -21,6 +23,13 @@ namespace EcommerceOrders.Application.Services.Orders
 
             if (order is null)
                 throw new DomainException("Order not found.");
+
+            order.Cancel();
+
+            _orderRepository.Update(order);
+
+            await _orderRepository.SaveChangesAsync(
+                cancellationToken);
 
             return new OrderResponse
             {

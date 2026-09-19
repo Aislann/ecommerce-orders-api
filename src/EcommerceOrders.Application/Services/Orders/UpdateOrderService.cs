@@ -5,21 +5,34 @@ using EcommerceOrders.Domain.Exceptions;
 
 namespace EcommerceOrders.Application.Services.Orders
 {
-    public class CreateOrderService
+    public class UpdateOrderService
     {
         private readonly IOrderRepository _orderRepository;
         private readonly IUserRepository _userRepository;
         private readonly IProductRepository _productRepository;
 
-        public CreateOrderService(IOrderRepository orderRepository, IUserRepository userRepository, IProductRepository productRepository)
+        public UpdateOrderService(
+            IOrderRepository orderRepository,
+            IUserRepository userRepository,
+            IProductRepository productRepository)
         {
             _orderRepository = orderRepository;
             _userRepository = userRepository;
             _productRepository = productRepository;
         }
 
-        public async Task<OrderResponse> ExecuteAsync(CreateOrderRequest request, CancellationToken cancellationToken = default)
+        public async Task<OrderResponse> ExecuteAsync(
+            int orderId,
+            UpdateOrderRequest request,
+            CancellationToken cancellationToken = default)
         {
+            var order = await _orderRepository.GetByIdAsync(
+                orderId,
+                cancellationToken);
+
+            if (order is null)
+                throw new DomainException("Order not found.");
+
             var user = await _userRepository.GetByIdAsync(
                 request.UserId,
                 cancellationToken);
@@ -47,13 +60,11 @@ namespace EcommerceOrders.Application.Services.Orders
                 items.Add(item);
             }
 
-            var order = new Order(
+            order.Update(
                 user.Id,
                 items);
 
-            await _orderRepository.AddAsync(
-                order,
-                cancellationToken);
+            _orderRepository.Update(order);
 
             await _orderRepository.SaveChangesAsync(
                 cancellationToken);

@@ -31,7 +31,9 @@ namespace EcommerceOrders.Api.Endpoints
                 .Produces<OrderResponse>(
                     StatusCodes.Status201Created)
                 .ProducesProblem(
-                    StatusCodes.Status400BadRequest);
+                    StatusCodes.Status400BadRequest)
+                .ProducesProblem(
+                    StatusCodes.Status404NotFound);
 
             group.MapGet(
                     "/",
